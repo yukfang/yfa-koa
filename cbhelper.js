@@ -19,7 +19,7 @@ router
     let timestamp = new Date();
 
     let resp = {
-        timestamp,
+      timestamp,
       body,
       path,
       headers,
@@ -30,7 +30,6 @@ router
 
     ctx.response.status = 200;
     // ctx.body = null;
-    return;
   })
   .all('/(.*)', (ctx, next)=>{
     ctx.body = 'No Function Found'
