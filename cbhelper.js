@@ -36,6 +36,6 @@ router
 app.use(router.routes()).use(router.allowedMethods());
 
 
-var port = normalizePort(process.env.PORT || '3000');
+var port = (process.env.PORT ||  8080 );
 
 app.listen(port);
