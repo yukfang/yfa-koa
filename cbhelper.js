@@ -10,10 +10,11 @@ const cbdataSize = (process.env.CB_DATA_SIZE || 100);
 
 router
   .get('/cbmonitor', (ctx, next) => {
-    ctx.body = JSON.stringify(cbdata, null, 2);
+    let output = cbdata.slice(0, 5);
+    ctx.body = JSON.stringify(output, null, 2);
   })
   .get('/cbmonitor/:num', (ctx, next) => {
-    let output = cbdata.slice(0, Math.min(ctx.params.num, cbdata.length))
+    let output = cbdata.slice(0, Math.min(ctx.params.num, cbdata.length));
     ctx.body = JSON.stringify(output, null, 2);
   })
   .all('/callback', (ctx, next) => {
