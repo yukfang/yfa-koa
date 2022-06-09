@@ -12,12 +12,8 @@ router
   .all('/callback', (ctx, next) => {
     var req = ctx.request;
 
-    let method  =  req.method;
-    let path    =  req.baseUrl;
-    let params  =  req.query;
-    let body    =  req.body;
-    let headers =  req.headers;
 
+    let headers = req.headers;
     /** Remve useless headers */
     delete headers['x-site-deployment-id'];
     delete headers['was-default-hostname'];
@@ -28,11 +24,12 @@ router
 
     let resp = {
       timestamp,
-      method,
-      body,
-      path,
-      headers,
-      params
+      method  : req.method,
+      body    : req.body,
+      url     : req.url,
+      origin  : req.origin,
+      headers ,
+      params  : req.query
     };
 
     cbdata = JSON.stringify(resp, null, 2);
