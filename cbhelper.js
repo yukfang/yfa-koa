@@ -16,6 +16,11 @@ router
     let params  =  req.query;
     let body    =  req.body;
     let headers =  req.headers;
+    delete headers['x-site-deployment-id'];
+    delete headers['was-default-hostname'];
+    delete headers['x-arr-log-id'];
+
+
     let timestamp = new Date();
 
     let resp = {
