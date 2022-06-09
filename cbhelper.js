@@ -5,19 +5,19 @@ const BodyParser = require('koa-bodyparser');
 
 var app = new Koa();
 var router = new Router();
-var cbdata = '';
+var cbdata = [];
+const cbdataSize = 10;
 
 router
   .get('/cbmonitor', (ctx, next) => {
-    ctx.body = cbdata;
+    ctx.body = JSON.stringify(cbdata, null, 2);
+  })
+  .get('/cbmonitor/:num', (ctx, next) => {
+    let output = cbdata.slice(0, Math.min(ctx.params.num, cbdata.length))
+    ctx.body = JSON.stringify(output, null, 2);
   })
   .all('/callback', (ctx, next) => {
     var req = ctx.request;
-    // let headers = req.headers;
-    // /** Remve useless headers */
-    // delete headers['x-site-deployment-id'];
-    // delete headers['was-default-hostname'];
-    // delete headers['x-arr-log-id'];
 
     let output = {
       timestamp : new Date(),
@@ -28,14 +28,16 @@ router
       headers   : req.headers,
       params    : req.query
     };
-    // let output = req;
+
     /** Remve useless headers */
     delete output.headers['x-site-deployment-id'];
     delete output.headers['was-default-hostname'];
     delete output.headers['x-arr-log-id'];
 
+    // cbdata = JSON.stringify(output, null, 2);
+    cbdata = [output].concat(cbdata).slice(0, cbdataSize);
+    // cbdata.slice(0, cbdataSize);
 
-    cbdata = JSON.stringify(output, null, 2);
 
     ctx.response.status = 200;
   })
