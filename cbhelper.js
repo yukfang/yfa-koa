@@ -13,9 +13,6 @@ router
   })
   .all('/callback', (ctx, next) => {
     var req = ctx.request;
-
-    var socket = req.socket;
-
     // let headers = req.headers;
     // /** Remve useless headers */
     // delete headers['x-site-deployment-id'];
