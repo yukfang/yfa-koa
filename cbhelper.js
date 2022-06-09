@@ -19,15 +19,16 @@ router
     // delete headers['was-default-hostname'];
     // delete headers['x-arr-log-id'];
 
-    let output = {
-      timestamp : new Date(),
-      method    : req.method,
-      body      : req.body,
-      url       : req.url,
-      origin    : req.origin,
-      headers   : req.headers,
-      params    : req.query
-    };
+    // let output = {
+    //   timestamp : new Date(),
+    //   method    : req.method,
+    //   body      : req.body,
+    //   url       : req.url,
+    //   origin    : req.origin,
+    //   headers   : req.headers,
+    //   params    : req.query
+    // };
+    let output = req;
     /** Remve useless headers */
     delete output.headers['x-site-deployment-id'];
     delete output.headers['was-default-hostname'];
