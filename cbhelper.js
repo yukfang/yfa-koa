@@ -6,7 +6,7 @@ const BodyParser = require('koa-bodyparser');
 var app = new Koa();
 var router = new Router();
 var cbdata = [];
-const cbdataSize = 10;
+const cbdataSize = (process.env.CB_DATA_SIZE || 100);
 
 router
   .get('/cbmonitor', (ctx, next) => {
