@@ -27,7 +27,10 @@ router
     };
 
     cbdata = JSON.stringify(resp, null, 2);
-    ctx.body = cbdata;
+
+    ctx.response.status = 200;
+    // ctx.body = null;
+    return;
   })
   .all('/(.*)', (ctx, next)=>{
     ctx.body = 'No Function Found'
